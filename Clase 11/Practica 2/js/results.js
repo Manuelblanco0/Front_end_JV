@@ -1,6 +1,12 @@
-fetch("https://rickandmortyapi.com/api/character")
-  .then(function(response) {
-    return response.json()
+let seccion = document.querySelector(".search-results")
+let queryString = location.search
+let objQueryString = new URLSearchParams(queryString)
+let resultado = objQueryString.get("formulario")
+let characters = ""
+
+fetch(`https://rickandmortyapi.com/api/character/?name=${resultado}`)
+  .then(function(results) {
+    return results.json()
 })
   .then(function(data) {
     console.log(data);
@@ -15,7 +21,7 @@ fetch("https://rickandmortyapi.com/api/character")
     </article> `
 
   }
-  listapersonajes.innerHTML = characters
+  seccion.innerHTML = characters
 })
 .catch(function(error) {
   console.log("Error: " + error);
